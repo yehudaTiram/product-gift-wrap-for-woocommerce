@@ -76,7 +76,7 @@ class WC_Product_Gift_Wrap {
 		add_action( 'init', array( $self, 'load_plugin_textdomain' ) );
 
 		// Display on the front end.
-		add_action( 'woocommerce_after_add_to_cart_button', array( $self, 'gift_option_html' ), 10 );
+		add_action('woocommerce_before_add_to_cart_button', array( $self, 'gift_option_html' ), 10 );
 
 		// Filters for cart actions.
 		add_filter( 'woocommerce_add_cart_item_data', array( $self, 'add_cart_item_data' ), 10, 2 );

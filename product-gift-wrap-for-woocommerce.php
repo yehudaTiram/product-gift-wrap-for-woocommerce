@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name: Product Gift Wrap for WooCommerce
- * Plugin URI: https://github.com/Tabrisrp/product-gift-wrap-for-woocommerce
+ * Plugin URI: https://github.com/yehudaTiram/product-gift-wrap-for-woocommerce
  * Description: Add an option to your products to enable gift wrapping. Optionally charge a fee.
  * Version: 1.3.1
  * Author: Rémy Perona, modified by Yehuda Tiram
