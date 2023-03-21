@@ -1,6 +1,6 @@
 === Product Gift Wrap for WooCoomerce ===
 Contributors: Yehuda Tiram
-Donate link: https://www.paypal.me/remp
+Donate link: https://www.paypal.com/donate/?cmd=_s-xclick&hosted_button_id=T6VTA75GTS3YA
 Tags: woocommerce, product, gift wrap
 Requires at least: 3.5
 Tested up to: 6.1.1
