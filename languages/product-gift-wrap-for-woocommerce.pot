@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Product Gift Wrap for WooCommerce\n"
-"POT-Creation-Date: 2023-03-14 18:42+0200\n"
+"POT-Creation-Date: 2023-03-20 19:33+0200\n"
 "PO-Revision-Date: 2023-03-14 18:42+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,73 +16,95 @@ msgstr ""
 "X-Poedit-WPHeader: product-gift-wrap-for-woocommerce.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 
-#: classes/class-wc-product-gift-wrap.php:106
+#: classes/class-wc-product-gift-wrap.php:120
 #, php-format
 msgid "Gift wrap this item for %s?"
 msgstr ""
 
-#: classes/class-wc-product-gift-wrap.php:189
+#: classes/class-wc-product-gift-wrap.php:207
 msgid "free"
 msgstr ""
 
-#: classes/class-wc-product-gift-wrap.php:263
-#: classes/class-wc-product-gift-wrap.php:309
+#: classes/class-wc-product-gift-wrap.php:282
+#: classes/class-wc-product-gift-wrap.php:292
+#: classes/class-wc-product-gift-wrap.php:340
 msgid "Gift Wrapped"
 msgstr ""
 
-#: classes/class-wc-product-gift-wrap.php:264
-#: classes/class-wc-product-gift-wrap.php:265
-#: classes/class-wc-product-gift-wrap.php:309
+#: classes/class-wc-product-gift-wrap.php:283
+#: classes/class-wc-product-gift-wrap.php:284
+msgid "No"
+msgstr ""
+
+#: classes/class-wc-product-gift-wrap.php:293
+#: classes/class-wc-product-gift-wrap.php:294
+#: classes/class-wc-product-gift-wrap.php:340
 msgid "Yes"
 msgstr ""
 
-#: classes/class-wc-product-gift-wrap.php:333
+#: classes/class-wc-product-gift-wrap.php:365
 msgid "Gift Wrappable"
 msgstr ""
 
-#: classes/class-wc-product-gift-wrap.php:334
+#: classes/class-wc-product-gift-wrap.php:366
 msgid "Enable this option if the customer can choose gift wrapping."
 msgstr ""
 
-#: classes/class-wc-product-gift-wrap.php:339
+#: classes/class-wc-product-gift-wrap.php:371
 msgid "Gift Wrap Cost"
 msgstr ""
 
-#: classes/class-wc-product-gift-wrap.php:342
+#: classes/class-wc-product-gift-wrap.php:374
 msgid "Override the default cost by inputting a cost here."
 msgstr ""
 
-#: classes/class-wc-product-gift-wrap.php:384
+#: classes/class-wc-product-gift-wrap.php:418
 msgid "Gift Wrapping Enabled by Default?"
 msgstr ""
 
-#: classes/class-wc-product-gift-wrap.php:385
+#: classes/class-wc-product-gift-wrap.php:419
 msgid "Enable this to allow gift wrapping for products by default."
 msgstr ""
 
-#: classes/class-wc-product-gift-wrap.php:390
+#: classes/class-wc-product-gift-wrap.php:424
 msgid "Default Gift Wrap Cost"
 msgstr ""
 
-#: classes/class-wc-product-gift-wrap.php:391
+#: classes/class-wc-product-gift-wrap.php:425
 msgid "The cost of gift wrap unless overridden per-product."
 msgstr ""
 
-#: classes/class-wc-product-gift-wrap.php:397
+#: classes/class-wc-product-gift-wrap.php:431
 msgid "Gift Wrap Message"
 msgstr ""
 
-#: classes/class-wc-product-gift-wrap.php:399
+#: classes/class-wc-product-gift-wrap.php:433
 msgid "Note: <code>{price}</code> will be replaced with the gift wrap cost."
 msgstr ""
 
-#: classes/class-wc-product-gift-wrap.php:401
+#: classes/class-wc-product-gift-wrap.php:435
 msgid "Label shown to the user on the frontend."
+msgstr ""
+
+#: classes/class-wc-product-gift-wrap.php:438
+msgid "Cart Message also for NO gift wrap"
+msgstr ""
+
+#: classes/class-wc-product-gift-wrap.php:440
+msgid ""
+"Select if you want to see explicit message if customer did not select gift "
+"wrap option."
+msgstr ""
+
+#: classes/class-wc-product-gift-wrap.php:442
+msgid ""
+"Explicite message shown to the user and to shop  manager if NO gift wrap "
+"required."
 msgstr ""
 
 #. Plugin Name of the plugin/theme
@@ -90,13 +112,13 @@ msgid "Product Gift Wrap for WooCommerce"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-msgid "https://github.com/Tabrisrp/product-gift-wrap-for-woocommerce"
+msgid "https://github.com/yehudaTiram/product-gift-wrap-for-woocommerce"
 msgstr ""
 
 #. Description of the plugin/theme
 msgid ""
 "Add an option to your products to enable gift wrapping. Optionally charge a "
-"fee."
+"fee. Settings is in Woocommerce settings - General"
 msgstr ""
 
 #. Author of the plugin/theme
@@ -104,5 +126,5 @@ msgid "Rémy Perona, modified by Yehuda Tiram"
 msgstr ""
 
 #. Author URI of the plugin/theme
-msgid "https://remyperona.fr"
+msgid "https://atarimtr.co.il"
 msgstr ""

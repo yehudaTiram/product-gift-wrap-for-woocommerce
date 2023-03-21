@@ -334,6 +334,9 @@ class WC_Product_Gift_Wrap
 	public function add_order_item_meta($item_id, $cart_item)
 	{
 		if (empty($cart_item['gift_wrap'])) {
+			if ($this->message_also_for_no_gift_wrap != 'no') {
+				wc_add_order_item_meta($item_id, __('Gift Wrapped', 'product-gift-wrap-for-woocommerce'), __('No', 'product-gift-wrap-for-woocommerce'));
+			}
 			return;
 		}
 
@@ -435,7 +438,7 @@ class WC_Product_Gift_Wrap
 				'desc_tip'  => __('Label shown to the user on the frontend.', 'product-gift-wrap-for-woocommerce'),
 			),
 			array(
-				'name' 		=> __('Cart Message if also for NO gift wrap', 'product-gift-wrap-for-woocommerce'),
+				'name' 		=> __('Cart Message also for NO gift wrap', 'product-gift-wrap-for-woocommerce'),
 				'id' 		=> 'message_also_for_no_gift_wrap',
 				'desc' 		=> __('Select if you want to see explicit message if customer did not select gift wrap option.', 'product-gift-wrap-for-woocommerce'),
 				'type' 		=> 'checkbox',
