@@ -1,12 +1,13 @@
 === Product Gift Wrap for WooCoomerce ===
-Contributors: tabrisrp
-Donate link: https://www.paypal.me/remp
+Contributors: Yehuda Tiram
+Donate link: https://www.paypal.com/donate/?cmd=_s-xclick&hosted_button_id=T6VTA75GTS3YA
 Tags: woocommerce, product, gift wrap
 Requires at least: 3.5
-Tested up to: 4.8
+Tested up to: 6.1.1
 Stable tag: 1.3.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
+Original Authors: Mike Jolley, Rémy Perona
 
 Add an option to your WooCommerce products to enable gift wrapping. Optionally charge a fee. For WooCommerce 2.2+
 
