@@ -74,6 +74,9 @@ class WC_Product_Gift_Wrap
 		$this->gift_wrap_cost            = get_option('product_gift_wrap_cost', 0);
 		$this->product_gift_wrap_message = get_option('product_gift_wrap_message');
 		$this->message_also_for_no_gift_wrap  = get_option('message_also_for_no_gift_wrap');
+
+		// Add the filter to intercept the settings sanitization.
+		add_filter('woocommerce_settings_sanitize_option', array($this, 'sanitize_all_settings'), 10, 3);
 	}
 
 	/**
@@ -132,8 +135,8 @@ class WC_Product_Gift_Wrap
 
 		load_textdomain('product-gift-wrap-for-woocommerce', trailingslashit(WP_LANG_DIR) . 'product-gift-wrap-for-woocommerce/product-gift-wrap-for-woocommerce-' . $locale . '.mo');
 		load_plugin_textdomain('product-gift-wrap-for-woocommerce', false, dirname(plugin_basename(__FILE__)) . '/languages/');
-
 	}
+
 	/**
 	 * Basic integration with WooCommerce Currency Switcher, developed by Aelia
 	 * (http://aelia.co). This method can be used by any 3rd party plugin to
@@ -434,8 +437,12 @@ class WC_Product_Gift_Wrap
 				'name' 		=> __('Gift Wrap Message', 'product-gift-wrap-for-woocommerce'),
 				'id' 		=> 'product_gift_wrap_message',
 				'desc' 		=> __('Note: <code>{price}</code> will be replaced with the gift wrap cost.', 'product-gift-wrap-for-woocommerce'),
-				'type' 		=> 'text',
+				'type' 		=> 'textarea',
 				'desc_tip'  => __('Label shown to the user on the frontend.', 'product-gift-wrap-for-woocommerce'),
+				// Add a custom attribute to flag this field for special sanitization.
+				'custom_attributes' => array(
+					'data-sanitize-filter' => 'product_gift_wrap_message_sanitize',
+				),
 			),
 			array(
 				'name' 		=> __('Cart Message also for NO gift wrap', 'product-gift-wrap-for-woocommerce'),
@@ -447,6 +454,52 @@ class WC_Product_Gift_Wrap
 		);
 
 		return $this->settings;
+	}
+
+	/**
+	 * Intercepts and sanitizes all settings fields.
+	 *
+	 * @param mixed $value The value to sanitize.
+	 * @param array $option The option data.
+	 * @param mixed $raw_value The raw value.
+	 * @return mixed The sanitized value.
+	 */
+	public function sanitize_all_settings($value, $option, $raw_value)
+	{
+		if (isset($option['custom_attributes']['data-sanitize-filter']) && 'product_gift_wrap_message_sanitize' === $option['custom_attributes']['data-sanitize-filter']) {
+			return $this->sanitize_gift_wrap_message($value);
+		}
+		return $value;
+	}
+
+	/**
+	 * The actual sanitization logic for the gift wrap message.
+	 *
+	 * @param string $value The value to sanitize.
+	 * @return string The sanitized value.
+	 */
+	public function sanitize_gift_wrap_message($value)
+	{
+		$allowed_html = array(
+			'span' => array(
+				'class' => array(),
+				'style' => array(),
+			),
+			'strong' => array(),
+			'br' => array(),
+			'img' => array(
+				'style' => array(),
+				'draggable' => array(),
+				'role' => array(),
+				'class' => array(),
+				'alt' => array(),
+				'src' => array(),
+				'height' => array(),
+				'width' => array(),
+			),
+			'bdi' => array(),
+		);
+		return wp_kses($value, $allowed_html);
 	}
 
 	/**

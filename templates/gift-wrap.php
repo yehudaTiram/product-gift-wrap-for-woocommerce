@@ -6,6 +6,10 @@
 		padding: 0 70px 0 0;
 	}
 
+	label.switch img.emoji {
+		font-size: 2rem;
+	}
+
 	/* Hide default HTML checkbox */
 	.switch input {
 		position: absolute;
@@ -42,7 +46,7 @@
 	}
 
 	input:checked+.slider {
-		background-color: #2196F3;
+		background-color: #333;
 	}
 
 	input:focus+.slider {
@@ -64,6 +68,27 @@
 		border-radius: 50%;
 	}
 </style>
+<?php
+$allowed_html = array(
+	'span' => array(
+		'class' => array(),
+		'style' => array(),
+	),
+	'strong' => array(),
+	'br' => array(),
+	'img' => array(
+		'style' => array(),
+		'draggable' => array(),
+		'role' => array(),
+		'class' => array(),
+		'alt' => array(),
+		'src' => array(),
+		'height' => array(), // Add height and width attributes
+		'width' => array(),
+	),
+	'bdi' => array(),
+);
+?>
 <p class="gift-wrapping" style="clear:both; padding-top: .5em;">
-	<label class="switch" for="gift_wrap"><input type="checkbox" id="gift_wrap" name="gift_wrap" value="yes" <?php checked($current_value, 1, false); ?>><span class="slider round"></span> <?php echo str_replace('{price}', $price_text, wp_kses_post($product_gift_wrap_message)); ?></label>
+	<label class="switch" for="gift_wrap"><input type="checkbox" id="gift_wrap" name="gift_wrap" value="yes" <?php checked($current_value, 1, false); ?>><span class="slider round"></span> <?php echo str_replace('{price}', $price_text, wp_kses_post($product_gift_wrap_message, $allowed_html)); ?></label>
 </p>
