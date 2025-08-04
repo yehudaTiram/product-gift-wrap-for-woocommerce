@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Product Gift Wrap for WooCommerce\n"
 "POT-Creation-Date: 2023-03-20 19:33+0200\n"
-"PO-Revision-Date: 2023-03-20 19:38+0200\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2024-10-08 11:55+0300\n"
+"Last-Translator: Yehuda Tiram <yehuda@atarimtr.co.il>\n"
 "Language-Team: \n"
 "Language: he_IL\n"
 "MIME-Version: 1.0\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n==2 ? 1 : n>10 && n%10==0 ? "
 "2 : 3);\n"
-"X-Generator: Poedit 2.4.3\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: product-gift-wrap-for-woocommerce.php\n"
@@ -25,7 +25,7 @@ msgstr ""
 #: classes/class-wc-product-gift-wrap.php:120
 #, php-format
 msgid "Gift wrap this item for %s?"
-msgstr "Gift wrap this item for %s"
+msgstr "אריזת מתנה עבור %s?"
 
 #: classes/class-wc-product-gift-wrap.php:207
 msgid "free"
@@ -54,7 +54,7 @@ msgstr "אריזת מתנה"
 
 #: classes/class-wc-product-gift-wrap.php:366
 msgid "Enable this option if the customer can choose gift wrapping."
-msgstr "במידה וניתן לארוז את המוצר הזה כמתנה לחץ כאן"
+msgstr "במידה וניתן לארוז את המוצר הזה כמתנה לחץ כאן."
 
 #: classes/class-wc-product-gift-wrap.php:371
 msgid "Gift Wrap Cost"
@@ -62,10 +62,9 @@ msgstr "לא ניתן להוסיף מחיר לאריזת מתנה. השאר על
 
 #: classes/class-wc-product-gift-wrap.php:374
 msgid "Override the default cost by inputting a cost here."
-msgstr "לא ניתן להוסיף מחיר לאריזת מתנה. השאר על 0"
+msgstr "לא ניתן להוסיף מחיר לאריזת מתנה. השאר על 0."
 
 #: classes/class-wc-product-gift-wrap.php:418
-#, fuzzy
 msgid "Gift Wrapping Enabled by Default?"
 msgstr "אריזת מתנה מופעלת כברירת מחדל?"
 
@@ -74,20 +73,18 @@ msgid "Enable this to allow gift wrapping for products by default."
 msgstr "אפשר זאת כדי להציג ללקוח סימון אריזת מתנה למוצרים כברירת מחדל."
 
 #: classes/class-wc-product-gift-wrap.php:424
-#, fuzzy
 msgid "Default Gift Wrap Cost"
 msgstr "עלות אריזת מתנה ברירת מחדל"
 
 #: classes/class-wc-product-gift-wrap.php:425
 msgid "The cost of gift wrap unless overridden per-product."
-msgstr "לא ניתן להוסיף מחיר לאריזת מתנה. השאר על 0"
+msgstr "לא ניתן להוסיף מחיר לאריזת מתנה. השאר על 0."
 
 #: classes/class-wc-product-gift-wrap.php:431
 msgid "Gift Wrap Message"
 msgstr "תווית לסימון אריזת מתנה"
 
 #: classes/class-wc-product-gift-wrap.php:433
-#, fuzzy
 msgid "Note: <code>{price}</code> will be replaced with the gift wrap cost."
 msgstr "הערה: <code>{price}</code> יוחלף בעלות אריזת המתנה."
 
@@ -112,7 +109,6 @@ msgid ""
 msgstr "הודעה מפורשת המוצגת למשתמש ולמנהל החנות אם אין צורך באריזת מתנה."
 
 #. Plugin Name of the plugin/theme
-#, fuzzy
 msgid "Product Gift Wrap for WooCommerce"
 msgstr "אריזת מתנה למוצר עבור WooCommerce"
 
@@ -121,14 +117,10 @@ msgid "https://github.com/yehudaTiram/product-gift-wrap-for-woocommerce"
 msgstr ""
 
 #. Description of the plugin/theme
-#, fuzzy
-#| msgid ""
-#| "Add an option to your products to enable gift wrapping. Optionally charge "
-#| "a fee."
 msgid ""
 "Add an option to your products to enable gift wrapping. Optionally charge a "
 "fee. Settings is in Woocommerce settings - General"
-msgstr "אפשרות להוסיף למוצרים שלך אריזת מתנה עם אופציה לקביעת תוספת מחיר."
+msgstr "אפשרות להוסיף למוצרים שלך אריזת מתנה עם אופציה לקביעת תוספת מחיר"
 
 #. Author of the plugin/theme
 msgid "Rémy Perona, modified by Yehuda Tiram"

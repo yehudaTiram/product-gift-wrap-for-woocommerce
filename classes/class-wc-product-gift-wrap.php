@@ -132,8 +132,8 @@ class WC_Product_Gift_Wrap
 
 		load_textdomain('product-gift-wrap-for-woocommerce', trailingslashit(WP_LANG_DIR) . 'product-gift-wrap-for-woocommerce/product-gift-wrap-for-woocommerce-' . $locale . '.mo');
 		load_plugin_textdomain('product-gift-wrap-for-woocommerce', false, dirname(plugin_basename(__FILE__)) . '/languages/');
-	}
 
+	}
 	/**
 	 * Basic integration with WooCommerce Currency Switcher, developed by Aelia
 	 * (http://aelia.co). This method can be used by any 3rd party plugin to
