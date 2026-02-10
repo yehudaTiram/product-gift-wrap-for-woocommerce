@@ -60,6 +60,13 @@ class WC_Product_Gift_Wrap
 	 */
 	public $message_also_for_no_gift_wrap;
 
+	/**
+	 * Plugin option to set where the gift wrap option is displayed on the product page.
+	 *
+	 * @since 1.4
+	 * @var string $gift_wrap_display_location WooCommerce hook name.
+	 */
+	public $gift_wrap_display_location;
 
 	/**
 	 * Construct function.
@@ -74,6 +81,7 @@ class WC_Product_Gift_Wrap
 		$this->gift_wrap_cost            = get_option('product_gift_wrap_cost', 0);
 		$this->product_gift_wrap_message = get_option('product_gift_wrap_message');
 		$this->message_also_for_no_gift_wrap  = get_option('message_also_for_no_gift_wrap');
+		$this->gift_wrap_display_location     = get_option('product_gift_wrap_display_location', 'woocommerce_before_add_to_cart_button');
 
 		// Add the filter to intercept the settings sanitization.
 		add_filter('woocommerce_settings_sanitize_option', array($this, 'sanitize_all_settings'), 10, 3);
@@ -92,7 +100,9 @@ class WC_Product_Gift_Wrap
 		add_action('init', array($self, 'load_plugin_textdomain'));
 
 		// Display on the front end.
-		add_action('woocommerce_before_add_to_cart_button', array($self, 'gift_option_html'), 10);
+		$display_location = $self->gift_wrap_display_location;
+		$priority = ('woocommerce_single_product_summary' === $display_location) ? 35 : 10;
+		add_action($display_location, array($self, 'gift_option_html'), $priority);
 
 		// Filters for cart actions.
 		add_filter('woocommerce_add_cart_item_data', array($self, 'add_cart_item_data'), 10, 2);
@@ -122,6 +132,7 @@ class WC_Product_Gift_Wrap
 		// Translators: %s is the price for the gift wrap.
 		add_option('product_gift_wrap_message', sprintf(__('Gift wrap this item for %s?', 'product-gift-wrap-for-woocommerce'), '{price}'));
 		add_option('message_also_for_no_gift_wrap', 'no');
+		add_option('product_gift_wrap_display_location', 'woocommerce_before_add_to_cart_button');
 	}
 
 	/**
@@ -442,6 +453,21 @@ class WC_Product_Gift_Wrap
 				// Add a custom attribute to flag this field for special sanitization.
 				'custom_attributes' => array(
 					'data-sanitize-filter' => 'product_gift_wrap_message_sanitize',
+				),
+			),
+			array(
+				'name' 		=> __('Gift Wrap Display Location', 'product-gift-wrap-for-woocommerce'),
+				'desc' 		=> __('Choose where the gift wrap option appears on the product page.', 'product-gift-wrap-for-woocommerce'),
+				'id' 		=> 'product_gift_wrap_display_location',
+				'type' 		=> 'select',
+				'desc_tip'  => true,
+				'options'   => array(
+					'woocommerce_before_add_to_cart_form'   => __('Before add-to-cart form', 'product-gift-wrap-for-woocommerce'),
+					'woocommerce_before_add_to_cart_button' => __('Before add-to-cart button', 'product-gift-wrap-for-woocommerce'),
+					'woocommerce_after_add_to_cart_button'  => __('After add-to-cart button', 'product-gift-wrap-for-woocommerce'),
+					'woocommerce_after_add_to_cart_form'    => __('After add-to-cart form', 'product-gift-wrap-for-woocommerce'),
+					'woocommerce_single_product_summary'    => __('Product summary (after price)', 'product-gift-wrap-for-woocommerce'),
+					'woocommerce_product_meta_start'        => __('Before product meta', 'product-gift-wrap-for-woocommerce'),
 				),
 			),
 			array(
