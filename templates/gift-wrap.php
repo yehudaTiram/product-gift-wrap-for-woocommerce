@@ -92,3 +92,47 @@ $allowed_html = array(
 <p class="gift-wrapping" style="clear:both; padding-top: .5em;">
 	<label class="switch" for="gift_wrap"><input type="checkbox" id="gift_wrap" name="gift_wrap" value="yes" <?php checked($current_value, 1, false); ?>><span class="slider round"></span> <?php echo str_replace('{price}', $price_text, wp_kses_post($product_gift_wrap_message, $allowed_html)); ?></label>
 </p>
+<script>
+	/*
+	 * Some display locations (e.g. "Product summary (after price)") render this
+	 * checkbox OUTSIDE the <form class="cart">, so its value is never submitted
+	 * with the add-to-cart request. When that happens, mirror the value into the
+	 * form on submit so the gift wrap selection is always received server-side.
+	 */
+	(function() {
+		function syncGiftWrap() {
+			var checkbox = document.getElementById('gift_wrap');
+			if (!checkbox) {
+				return;
+			}
+
+			var form = document.querySelector('form.cart');
+			if (!form || form.contains(checkbox)) {
+				// No form found, or the checkbox is already inside it (submitted normally).
+				return;
+			}
+
+			form.addEventListener('submit', function() {
+				var existing = form.querySelector('input.gift-wrap-mirror');
+				if (existing) {
+					existing.parentNode.removeChild(existing);
+				}
+
+				if (checkbox.checked) {
+					var hidden = document.createElement('input');
+					hidden.type = 'hidden';
+					hidden.name = 'gift_wrap';
+					hidden.value = 'yes';
+					hidden.className = 'gift-wrap-mirror';
+					form.appendChild(hidden);
+				}
+			});
+		}
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', syncGiftWrap);
+		} else {
+			syncGiftWrap();
+		}
+	})();
+</script>
