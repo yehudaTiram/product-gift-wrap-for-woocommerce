@@ -193,6 +193,52 @@ class WC_Product_Gift_Wrap
 	}
 
 	/**
+	 * Get the gift wrap cost for a product as a float.
+	 *
+	 * Falls back to the global default when the product has no override.
+	 * Normalises comma decimals, currency symbols and blanks so the value is
+	 * always safe for arithmetic on PHP 8.
+	 *
+	 * @access protected
+	 * @param int $product_id Product ID.
+	 * @return float
+	 */
+	protected function get_gift_wrap_cost($product_id)
+	{
+		$cost = get_post_meta($product_id, '_gift_wrap_cost', true);
+
+		if ('' === $cost || null === $cost) {
+			$cost = $this->gift_wrap_cost;
+		}
+
+		$cost = str_replace(',', '.', (string) $cost);
+		$cost = wc_format_decimal($cost);
+
+		return is_numeric($cost) ? (float) $cost : 0.0;
+	}
+
+	/**
+	 * Get the base price of a product or variation as a float.
+	 *
+	 * @access protected
+	 * @param int $product_id   Product ID.
+	 * @param int $variation_id Variation ID (0 when not a variation).
+	 * @return float
+	 */
+	protected function get_base_price($product_id, $variation_id = 0)
+	{
+		$product = wc_get_product($variation_id ? $variation_id : $product_id);
+
+		if (!$product) {
+			return 0.0;
+		}
+
+		$price = $product->get_price();
+
+		return is_numeric($price) ? (float) $price : 0.0;
+	}
+
+	/**
 	 * Show the Gift Checkbox on the frontend
 	 *
 	 * @access public
@@ -212,11 +258,7 @@ class WC_Product_Gift_Wrap
 
 			$current_value = (isset($_REQUEST['gift_wrap']) && !empty(absint($_REQUEST['gift_wrap']))) ? 1 : 0;
 
-			$cost = get_post_meta($post->ID, '_gift_wrap_cost', true);
-
-			if ('' === $cost) {
-				$cost = $this->gift_wrap_cost;
-			}
+			$cost = $this->get_gift_wrap_cost($post->ID);
 
 			$price_text = $cost > 0 ? wc_price($this->get_price_in_currency($cost)) : __('free', 'product-gift-wrap-for-woocommerce');
 
@@ -267,15 +309,10 @@ class WC_Product_Gift_Wrap
 
 		$cart_item['gift_wrap'] = true;
 
-		$cost = get_post_meta($cart_item['product_id'], '_gift_wrap_cost', true);
+		$cost       = $this->get_gift_wrap_cost($values['product_id']);
+		$base_price = $this->get_base_price($values['product_id'], !empty($values['variation_id']) ? $values['variation_id'] : 0);
 
-		if ('' === $cost) {
-			$cost = $this->gift_wrap_cost;
-		}
-
-		$product = wc_get_product($values['variation_id'] ? $values['variation_id'] : $values['product_id']);
-
-		$cart_item['data']->set_price($product->get_price() + $this->get_price_in_currency($cost));
+		$cart_item['data']->set_price($base_price + (float) $this->get_price_in_currency($cost));
 
 		return $cart_item;
 	}
@@ -324,15 +361,10 @@ class WC_Product_Gift_Wrap
 			return $cart_item;
 		}
 
-		$cost = get_post_meta($cart_item['product_id'], '_gift_wrap_cost', true);
+		$cost       = $this->get_gift_wrap_cost($cart_item['product_id']);
+		$base_price = $this->get_base_price($cart_item['product_id'], !empty($cart_item['variation_id']) ? $cart_item['variation_id'] : 0);
 
-		if ('' === $cost) {
-			$cost = $this->gift_wrap_cost;
-		}
-
-		$product = wc_get_product($cart_item['variation_id'] ? $cart_item['variation_id'] : $cart_item['product_id']);
-
-		$cart_item['data']->set_price($product->get_price() + $this->get_price_in_currency($cost));
+		$cart_item['data']->set_price($base_price + (float) $this->get_price_in_currency($cost));
 
 		return $cart_item;
 	}
@@ -417,6 +449,11 @@ class WC_Product_Gift_Wrap
 		$_gift_wrap_cost    = !empty($_POST['_gift_wrap_cost']) ? wc_clean($_POST['_gift_wrap_cost']) : '';
 		$_gift_wrap_cost	= str_replace(',', '.', $_gift_wrap_cost);
 
+		if ('' !== $_gift_wrap_cost) {
+			$_gift_wrap_cost = wc_format_decimal($_gift_wrap_cost);
+			$_gift_wrap_cost = is_numeric($_gift_wrap_cost) ? $_gift_wrap_cost : '';
+		}
+
 		update_post_meta($post_id, '_is_gift_wrappable', $_is_gift_wrappable);
 		update_post_meta($post_id, '_gift_wrap_cost', $_gift_wrap_cost);
 	}
@@ -495,6 +532,12 @@ class WC_Product_Gift_Wrap
 		if (isset($option['custom_attributes']['data-sanitize-filter']) && 'product_gift_wrap_message_sanitize' === $option['custom_attributes']['data-sanitize-filter']) {
 			return $this->sanitize_gift_wrap_message($value);
 		}
+
+		if (isset($option['id']) && 'product_gift_wrap_cost' === $option['id']) {
+			$value = wc_format_decimal(str_replace(',', '.', (string) $value));
+			return is_numeric($value) ? $value : '0';
+		}
+
 		return $value;
 	}
 
